@@ -1,0 +1,332 @@
+:root{
+    --strong-cyan: hsl(172, 67%, 45%);
+    --very-dark-cyan: hsl(183, 100%, 15%);
+    --dark-grayish-cyan: hsl(186, 14%, 43%);
+    --dark-grayish-cyan-two: hsl(184, 14%, 56%);
+    --light-grayish-cyan: hsl(185, 41%, 84%);
+    --light-grayish-cyan-two: hsl(189, 41%, 97%);
+    --white: hsl(0, 0%, 100%);
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0 auto;
+    max-width: 1440px;
+    min-width: 320px;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light-grayish-cyan);
+    
+    padding: 100px 10px;
+    font-family:'Space Mono', monospace;
+    font-size: 24px;
+}
+
+label, p {
+    font-size: 0.75em;
+}
+p span {
+    font-size: 0.65em;
+}
+
+
+
+/* Main */
+main {
+    max-width: 1000px;
+    margin-bottom: 50px;
+}
+
+main header img {
+    margin: 0 auto;
+    display: block;
+}
+
+/* Tip Calculator */
+main div.tip-calculator {
+    margin-top: 3em;
+    padding: 1em;
+    background: var(--white);
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 1em;
+}
+
+
+/* Input Area */
+main div.tip-calculator div.input-area {
+    font-weight: 700;
+    color: var(--dark-grayish-cyan);
+    padding: 1em;
+}
+main div.tip-calculator div.input-area form {
+    display: grid;
+    gap: 1em;
+}
+main div.tip-calculator div.input-area form input {
+    width: 100%;
+    font-size: 1em;
+    padding: 10px;
+    color: var(--very-dark-cyan);
+    background: var(--light-grayish-cyan-two);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 700;
+    font-family: inherit;
+    text-align: right;
+    color: var(--very-dark-cyan);
+    cursor: pointer;
+}
+main div.tip-calculator div.input-area form input:focus{
+    outline: 2px solid var(--strong-cyan);
+}
+main div.tip-calculator div.input-area form div.tip-choices {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+/* Tip - Choices Working on the options */
+main div.tip-calculator div.input-area form div.tip-choices input.input__radio {
+    display: none;
+}
+main div.tip-calculator div.input-area div.tip-choices input.input__radio:checked + .input__label{
+    background: var(--strong-cyan);
+}
+main div.tip-calculator div.input-area form div.tip-choices label.input__label {
+    background: var(--very-dark-cyan);
+    color: var(--white);
+    font-size: 1em;
+    font-weight: 700;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+main div.tip-calculator div.input-area form div.tip-choices label.input__label:hover{
+    background: hsl(172, 56%, 72%);
+}
+
+main div.tip-calculator div.input-area div.tip-choices input[type="number"]::placeholder{
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Removing scroll form input[number] */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Adding dollar and person icon to input */
+main div.tip-calculator div.input-area div.bill div,
+main div.tip-calculator div.input-area div.people-no div{
+    position: relative;
+}
+main div.tip-calculator div.input-area div.bill div svg.dollar-icon,
+main div.tip-calculator div.input-area div.people-no div svg.person-icon{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+
+
+/* Output Area */
+main div.tip-calculator div.output-area{
+    position: relative;
+    padding: 1.5em;
+    background: var(--very-dark-cyan);
+    color: white;
+    border-radius: 0.5em;
+    font-weight: 700;
+
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+main div.tip-calculator div.output-area p {
+    color: var(--light-grayish-cyan-two);
+}
+main div.tip-calculator div.output-area p span {
+    color: var(--light-grayish-cyan);
+    display: block;
+}
+
+
+
+/* Tip Amount Displayes Per Person and Total Tip */
+main div.tip-calculator div.output-area p.tip-amount{
+    color: var(--strong-cyan);
+    font-size: 2.2em;
+    max-width: 250px;
+    overflow-x: auto;
+}
+/* width */
+main div.tip-calculator div.output-area p.tip-amount::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+main div.tip-calculator div.output-area p.tip-amount::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(108, 138, 123); 
+    border-radius: 10px;
+}
+
+/* Handle */
+main div.tip-calculator div.output-area p.tip-amount::-webkit-scrollbar-thumb {
+    background: var(--strong-cyan); 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+main div.tip-calculator div.output-area p.tip-amount::-webkit-scrollbar-thumb:hover {
+    background: rgb(122, 221, 208); 
+}
+
+
+/*-------------------------------------------------*/
+
+
+
+
+
+
+main div.tip-calculator div.output-area div.tip-per-person {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+main div.tip-calculator div.output-area div.total-tip {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+main div.tip-calculator div.output-area button#reset-all {
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--very-dark-cyan);
+    background: var(--strong-cyan);
+    text-transform: uppercase;
+
+    border: none;
+    border-radius: 5px;
+
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+main div.tip-calculator div.output-area button#reset-all:hover {
+    background: hsl(172, 80%, 48%);
+}
+main div.tip-calculator div.output-area button#reset-all:active {
+    background: rgb(175, 255, 244);
+}
+
+
+/* Footer Area */
+footer {
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+p.attribution { font-size: 12px; text-align: center; }
+p.attribution a {
+    text-decoration: none;
+    color: hsl(228, 45%, 44%);
+}
+
+
+
+/* Smaller Screens */
+@media screen and (max-width: 950px) {
+    main div.tip-calculator{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+    main div.tip-calculator div.output-area p.tip-amount{
+        max-width: 400px;
+    }
+
+    /* Reset Button */
+    main div.tip-calculator div.output-area button#reset-all {
+        margin-top: 20px;
+    }
+
+}
+@media screen and (max-width: 750px) {
+    main div.tip-calculator div.output-area p.tip-amount{
+        max-width: 300px;
+    }
+}
+@media screen and (max-width: 650px) {
+    main div.tip-calculator div.output-area p.tip-amount{
+        max-width: 250px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    main div.tip-calculator div.input-area form div.tip div.tip-choices{
+        margin-top: 10px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    label, p {
+        font-size: 0.6em;
+    }
+    p span {
+        font-size: 0.5em;
+    }
+    main div.tip-calculator{
+        padding: 15px;
+    }
+    main div.tip-calculator div.input-area{
+        padding: 0px;
+    }
+    main div.tip-calculator div.output-area{
+        padding: 20px;
+    }
+    main div.tip-calculator div.input-area form input {
+        font-size: 0.8em;
+    }
+    main div.tip-calculator div.input-area div.tip-choices input[type="number"]::placeholder{
+        font-size: 0.8em;
+    }
+    main div.tip-calculator div.input-area form div.tip-choices label.input__label {
+        font-size: 0.8em;
+    }
+    main div.tip-calculator div.output-area p.tip-amount{
+        font-size: 1em;
+    }
+}
+
+
+
+
