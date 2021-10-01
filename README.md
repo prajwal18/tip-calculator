@@ -1,1 +1,1 @@
-Check it out live https://
+Check it out live https://prajwal18.github.io/tip-calculator/
