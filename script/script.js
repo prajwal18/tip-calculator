@@ -4,94 +4,88 @@ const tipRadio = document.getElementsByName('myRadio');
 const tipInput = document.getElementById('tip-value-custom');
 const reset = document.getElementById('reset-all');
 
-/* Some Variables */
+/* To Edit the value in Screen */
+const displayTipPerPerson = document.getElementById('tip-per-person');
+const displayTotalBillPerPerson = document.getElementById('total-bill-per-person');
+
+/* Some Variables for math*/
 let billAmount = 0;
 let noOfPeople = 0;
-let tipAmount = 0;
-/*Display to page*/
-let totalTip = 0.00;
+let tipPercent = 0;
+let totalTip = 0;
+/*Variables Displayed to page*/
+let totalBillPerPerson = 0.00;
 let tipPerPerson = 0.00;
 
-bill.addEventListener('input', e => {
-    billAmount = bill.value;
 
-    calcTipPerPerson();
-    calcTotalTip();
-});
+/* Function to calculate value */
+// Calculate Tip per person and bill per person
+function calcTipAndBillPerPerson(billA, tipP, noP){
+    if(noP == 0 | noP == null){
+        tipPerPerson = 0.00;
+        totalBillPerPerson = 0.00;
+    } else {
+        tipPerPerson = (billA*tipP)/(100*noP);
+        totalBillPerPerson = billA/noP + tipPerPerson;
+    }
+    console.log(tipP);
+    displayToScreen();
+}
+//display to screen
+function displayToScreen(){
+    displayTipPerPerson.innerHTML = '$' + tipPerPerson.toFixed(2).toString();
+    displayTotalBillPerPerson.innerHTML = '$' + totalBillPerPerson.toFixed(2).toString();
+}
+//Reset All the values
+function resetAll() {
+    billAmount = 0;
+    noOfPeople = 0;
+    tipPercent = 0;
+    totalTip = 0;
+    totalBillPerPerson = 0.00;
+    tipPerPerson = 0.00;
+    displayToScreen();
+    deselectAllRadio();
+    //Remove value from input field
+    bill.value = null;
+    tipInput.value = null;
+    people.value = null;
+}
 
-tipRadio.forEach( tip => {
-    tip.addEventListener('click', e => {
-        tipAmount = 0;
-        tipInput.value = null;
-
-        tipAmount = tip.value;
-        calcTipPerPerson();
-        calcTotalTip();
-    });
-} );
-
-tipInput.addEventListener('input', e => {
-    /*Deselect all the radio options*/
-    deselectAll();
-    tipAmount = 0;
-    tipAmount = tipInput.value;
-
-    calcTipPerPerson();
-    calcTotalTip();
-});
-
-
-people.addEventListener('input', e => {
-    noOfPeople = Math.floor(people.value);
-
-    calcTipPerPerson();
-    calcTotalTip();
-});
-
-
-/* Useful Functions */
-
-/* Deselect all the radio options */
-function deselectAll() {
+function deselectAllRadio(){
     tipRadio.forEach( tip =>{
         tip.checked = false;
     });
 }
 
-function calcTotalTip() {
-    totalTip = (billAmount*tipAmount)/100;
-    document.getElementById('total-amount').innerHTML = '$' + totalTip.toFixed(2).toString();
-}
 
-function calcTipPerPerson() {
-    if(noOfPeople == 0 | noOfPeople == null){
-        tipPerPerson = 0.00;
-    } else {
-        tipPerPerson = (billAmount*tipAmount)/(100*noOfPeople);
-    }
-    document.getElementById('per-person-amount').innerHTML = '$' + tipPerPerson.toFixed(2).toString();
-}
+/* --------------------------- Now Adding Event Listener to various Parts --------------------------- */
 
-
-
-/* The Reset Button */
-reset.addEventListener('click', e => {
-    billAmount = 0;
-    noOfPeople = 0;
-    tipAmount = 0;
-    totalTip = 0.00;
-    tipPerPerson = 0.00;
-
-    document.getElementById('total-amount').innerHTML = '$' + totalTip.toFixed(2).toString();
-    document.getElementById('per-person-amount').innerHTML = '$' + tipPerPerson.toFixed(2).toString();
-
-    deselectAll();
-    bill.value = null;
-    tipInput.value = null;
-    people.value = null;
-
+bill.addEventListener('input', e => {
+    billAmount = bill.value;
+    calcTipAndBillPerPerson(billAmount, tipPercent, noOfPeople);
 });
 
+tipRadio.forEach( tip => {
+    tip.addEventListener('click', e => {
+        tipInput.value = null;
+        tipPercent = tip.value;
+        calcTipAndBillPerPerson(billAmount, tipPercent, noOfPeople);
+    });
+} );
 
+tipInput.addEventListener('input', e => {
+    /*Deselect all the radio options*/
+    deselectAllRadio();
+    tipPercent = tipInput.value;
+    calcTipAndBillPerPerson(billAmount, tipPercent, noOfPeople);
+});
 
+people.addEventListener('input', e => {
+    noOfPeople = Math.floor(people.value);
+    calcTipAndBillPerPerson(billAmount, tipPercent, noOfPeople);
+});
 
+reset.addEventListener('click', e => {
+    resetAll();
+});
