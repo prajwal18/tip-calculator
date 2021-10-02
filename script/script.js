@@ -12,7 +12,6 @@ const displayTotalBillPerPerson = document.getElementById('total-bill-per-person
 let billAmount = 0;
 let noOfPeople = 0;
 let tipPercent = 0;
-let totalTip = 0;
 /*Variables Displayed to page*/
 let totalBillPerPerson = 0.00;
 let tipPerPerson = 0.00;
@@ -28,7 +27,6 @@ function calcTipAndBillPerPerson(billA, tipP, noP){
         tipPerPerson = (billA*tipP)/(100*noP);
         totalBillPerPerson = billA/noP + tipPerPerson;
     }
-    console.log(tipP);
     displayToScreen();
 }
 //display to screen
@@ -41,7 +39,6 @@ function resetAll() {
     billAmount = 0;
     noOfPeople = 0;
     tipPercent = 0;
-    totalTip = 0;
     totalBillPerPerson = 0.00;
     tipPerPerson = 0.00;
     displayToScreen();
